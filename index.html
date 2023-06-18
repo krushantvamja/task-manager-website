@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #007bff;
+    }
+    
+    .task-form {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .task-form input[type="text"],
+    .task-form input[type="datetime-local"],
+    .task-form button {
+      margin-right: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      border: none;
+      outline: none;
+    }
+    
+    .task-form input[type="text"],
+    .task-form input[type="datetime-local"] {
+      flex: 1;
+    }
+    
+    .task-form button {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    .task-list {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    .task-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f7f7f7;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .task-item span {
+      margin-right: 10px;
+    }
+    
+    .task-item button {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    
+    .clear-tasks {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+    
+    .clear-tasks button {
+      background-color: #dc3545;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Task Manager</h1>
+    
+    <form class="task-form">
+      <input type="text" id="task-name" placeholder="Task Name" required>
+      <input type="datetime-local" id="task-datetime" required>
+      <button type="submit">Add Task</button>
+    </form>
+    
+    <ul class="task-list"></ul>
+    
+    <div class="clear-tasks">
+      <button id="clear-tasks">Clear All Tasks</button>
+    </div>
+  </div>
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Task Manager</title>
+  <style>
+    /* ... CSS styles ... */
+  </style>
+</head>
+<body>
+  <script>
+    // Retrieve task form, task list, and clear tasks button elements
+    const taskForm = document.querySelector('.task-form');
+    const taskList = document.querySelector('.task-list');
+    const clearTasksButton = document.querySelector('#clear-tasks');
+    
+    // Add event listener to the task form
+    taskForm.addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent form submission
+      
+      // Get task name and datetime values from the form
+      const taskNameInput = document.querySelector('#task-name');
+      const taskDatetimeInput = document.querySelector('#task-datetime');
+      const taskName = taskNameInput.value;
+      const taskDatetime = taskDatetimeInput.value;
+      
+      // Create a new task item element
+      const taskItem = document.createElement('li');
+      taskItem.classList.add('task-item');
+      
+      // Create task name and datetime display elements
+      const taskNameDisplay = document.createElement('span');
+      taskNameDisplay.textContent = taskName;
+      
+      const taskDatetimeDisplay = document.createElement('span');
+      taskDatetimeDisplay.textContent = taskDatetime;
+      
+      // Append name and datetime to the task item
+      taskItem.appendChild(taskNameDisplay);
+      taskItem.appendChild(document.createTextNode(' - '));
+      taskItem.appendChild(taskDatetimeDisplay);
+      
+      // Append the task item to the task list
+      taskList.appendChild(taskItem);
+      
+      // Calculate the time difference between the task's due datetime and the current datetime
+      const now = new Date();
+      const dueDatetime = new Date(taskDatetime);
+      const timeDifference = dueDatetime - now;
+      
+      // Schedule the reminder using setTimeout
+      setTimeout(function() {
+        alert('Reminder: ' + taskName);
+      }, timeDifference);
+      
+      // Reset the form inputs
+      taskNameInput.value = '';
+      taskDatetimeInput.value = '';
+    });
+    
+    // Add event listener to the clear tasks button
+    clearTasksButton.addEventListener('click', function() {
+      taskList.innerHTML = ''; // Clear the task list
+    });
+  </script>
+</body>
+</html>
